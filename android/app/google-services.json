@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "477238044628",
+    "project_id": "rivalx-app",
+    "storage_bucket": "rivalx-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477238044628:android:133686f90c0c29801e5841",
+        "android_client_info": {
+          "package_name": "com.rivalx.rivalx"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtz2RwMChKANUjEHj12Di5JPYyGm1tSOU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,289 @@
+{
+  "product_info": {
+    "app_name": "RivalX",
+    "platforms": ["Android", "iOS"],
+    "category": "Fitness",
+    "version": "1.0",
+    "last_updated": "2025-07-23",
+    "owner": "Development Team"
+  },
+  "core_concept": {
+    "description": "A mobile fitness application that promotes a healthy lifestyle through gamified rivalry and competition. With features like Rival Mode, leaderboards, and point-based rankings, users are motivated to push themselves and engage with their fitness goals consistently",
+    "target_audience": "Fitness enthusiasts who thrive on competition and social accountability"
+  },
+  "goals_and_objectives": [
+    "Promote healthy lifestyle through rivalry and competition",
+    "Drive user engagement through gamified fitness tracking",
+    "Create competitive social ecosystem for fitness motivation",
+    "Build sustainable point-based ranking system"
+  ],
+  "core_features": {
+    "routine_creation": {
+      "emoji": "🏋️",
+      "title": "Routine Creation",
+      "features": [
+        "Create custom workout routines from ExerciseDB API",
+        "Manual exercise entry option",
+        "Filter exercises by muscle group",
+        "Track sets, reps, weight (optional), distance (optional)",
+        "Save and share routines with other users"
+      ]
+    },
+    "fitness_tracking": {
+      "emoji": "📊",
+      "title": "Fitness Tracking",
+      "features": [
+        "Log workouts: duration, sets, reps, weight, distance",
+        "Display stats post-workout per session",
+        "Sync with device step/distance trackers (iOS/Android)",
+        "Manual step or distance input available",
+        "Track personal records (PRs)"
+      ]
+    },
+    "nutrition_tracking": {
+      "emoji": "🍎",
+      "title": "Meal, Calorie & Nutrition Tracking",
+      "features": [
+        "Search food via USDA FDC API",
+        "Log meals by category: Breakfast, Snack, Lunch, Dinner, MicroMeals",
+        "Track calories and macros (Protein, Carbs, Fat)",
+        "Set daily calorie and macro goals",
+        "Save and share recipes",
+        "Track remaining calories based on daily limit"
+      ]
+    },
+    "leaderboard": {
+      "emoji": "🏆",
+      "title": "Leaderboard",
+      "features": [
+        "Daily, Weekly, Monthly, and All-Time leaderboards",
+        "Context-specific (Global, Challenge-specific)",
+        "Rankings based on weighted point system",
+        "Challenge-specific leaderboards"
+      ]
+    },
+    "rival_mode": {
+      "emoji": "⚔️",
+      "title": "Rival Mode",
+      "features": [
+        "Select a Rival weekly",
+        "Compete 1v1 in solo or challenge mode",
+        "Exchange challenges with rival",
+        "Winner earns 10% of rival's weekly points",
+        "View rival pairings within challenges"
+      ]
+    },
+    "competitions_challenges": {
+      "emoji": "🎯",
+      "title": "Competitions/Challenges",
+      "features": [
+        "Types: Public (open join) & Private (invite only)",
+        "In-app chat/comment area for each challenge",
+        "View active rivalries within challenge",
+        "Challenge-specific leaderboards",
+        "User-created challenges"
+      ]
+    },
+    "user_profiles": {
+      "emoji": "👤",
+      "title": "User Profiles",
+      "features": [
+        "Date Joined",
+        "Volume of Weight Lifted",
+        "Distance Walked",
+        "Rank & Progress to Next Rank",
+        "Total Points",
+        "Email, Username",
+        "Number of Penalties",
+        "Editable by user (non-editable by others)",
+        "Viewable by friends"
+      ]
+    },
+    "authentication": {
+      "emoji": "🔐",
+      "title": "Signup/Login",
+      "features": [
+        "Signup: First name, Last name, Email, Username, Password",
+        "Optional: Height, Weight, Goal Weight, Fitness Level",
+        "Login: Email/Username & Password",
+        "Biometric Authentication (Fingerprint, FaceID)",
+        "Passkeys support",
+        "Firebase Authentication"
+      ]
+    },
+    "social_features": {
+      "emoji": "👥",
+      "title": "Add Friends",
+      "features": [
+        "Search for and add friends by username or email",
+        "View friend's profiles and challenges",
+        "Friend-based leaderboards"
+      ]
+    },
+    "point_rank_system": {
+      "emoji": "⭐",
+      "title": "Point & Rank System",
+      "features": [
+        "Starting Rank: E",
+        "Progression: E → D → C → B → A → S → SS",
+        "Points earned via workouts, steps, meals, PRs",
+        "7-Day Workout Streak (+5% bonus)",
+        "Rival Mode wins (+10% of rival's points)",
+        "Daily Challenges completion",
+        "Weighted point system based on activity importance"
+      ]
+    },
+    "daily_challenges": {
+      "emoji": "📅",
+      "title": "Daily Challenges",
+      "features": [
+        "Simple, equipment-free challenges",
+        "Rotates daily",
+        "Contributes to point system",
+        "Examples: 50 squats, 5-min plank"
+      ]
+    },
+    "penalty_system": {
+      "emoji": "⚠️",
+      "title": "Penalty System",
+      "features": [
+        "Triggered by failing minimum workout requirements",
+        "Choose between point deduction or Extreme Routine",
+        "Extreme Routines curated by challenge creators",
+        "Penalty tracking in user profile"
+      ]
+    }
+  },
+  "technical_stack": {
+    "frontend": "Flutter/Dart",
+    "backend": "Firebase",
+    "backend_services": [
+      "Firebase Authentication",
+      "Firestore Database",
+      "Firebase Storage",
+      "Cloud Functions"
+    ],
+    "platform_integrations": {
+      "ios": ["HealthKit", "Biometric Authentication", "Passkeys"],
+      "android": ["Samsung Health", "Google Fit", "Biometric Authentication"]
+    },
+    "apis": {
+      "exercise_database": "https://github.com/ExerciseDB/exercisedb-api",
+      "nutrition_database": "https://fdc.nal.usda.gov/api-guide"
+    },
+    "authentication": [
+      "Biometric Authentication (Fingerprint, FaceID)",
+      "Passkeys",
+      "Firebase Authentication (Email/Password)",
+      "Social Login (Optional)"
+    ]
+  },
+  "ui_ux_design": {
+    "color_scheme": {
+      "primary": "Black",
+      "secondary": "Slate Grey",
+      "accent": "Yellow"
+    },
+    "theme": "Competitive and motivational with rivalry-focused design",
+    "key_elements": [
+      "Leaderboard displays",
+      "Point progression indicators",
+      "Rival comparison views",
+      "Challenge-focused interfaces"
+    ]
+  },
+  "monetization": {
+    "current_model": "Free with potential premium features",
+    "future_premium_features": [
+      "Analytics & Custom Coaching",
+      "Monthly Events/Seasons with exclusive Ranks",
+      "Advanced competition features"
+    ]
+  },
+  "success_metrics": [
+    "Daily Active Users (DAU) > 5,000 within 6 months",
+    "User Retention: 40%+ monthly",
+    "Average # of Workouts Logged/User/Week: 3+",
+    "Leaderboard Engagement: 50% of users in at least 1 challenge or rival pairing",
+    "App Store Rating: 4.5+ after 90 days"
+  ],
+  "mvp_scope": [
+    "Routine Creation with ExerciseDB integration",
+    "Basic Fitness Tracking",
+    "Meal and Nutrition Tracking with USDA API",
+    "Point & Rank System (E through SS ranks)",
+    "Rival Mode (1v1 weekly competitions)",
+    "Basic Challenges (Public/Private)",
+    "User Profiles and Friend System",
+    "Daily Challenges",
+    "Penalty System",
+    "Leaderboards (Daily, Weekly, Monthly, All-Time)"
+  ],
+  "future_enhancements": [
+    "Social Feed (activity logs of friends)",
+    "Video Demonstrations for Exercises",
+    "Premium Mode with Analytics & Custom Coaching",
+    "Monthly Events/Seasons with exclusive Ranks or Rewards",
+    "Integration with wearables (Apple Watch, Fitbit, Garmin)",
+    "AR features for exercise guidance",
+    "AI-powered workout recommendations"
+  ],
+  "non_functional_requirements": {
+    "scalability": "Support thousands of concurrent users",
+    "security": "Firebase Auth + Firestore rules + HTTPS API usage",
+    "offline_support": "Cached data entry with sync upon reconnect",
+    "performance": "Sub-second load time for major interactions",
+    "accessibility": "Dynamic text sizing and color contrast accessibility"
+  },
+  "development_priorities": {
+    "phase_1_core": [
+      "routine_creation",
+      "fitness_tracking",
+      "nutrition_tracking",
+      "point_rank_system",
+      "user_profiles",
+      "authentication"
+    ],
+    "phase_2_competition": [
+      "rival_mode",
+      "competitions_challenges",
+      "leaderboard",
+      "daily_challenges",
+      "penalty_system"
+    ],
+    "phase_3_social": [
+      "social_features",
+      "advanced_leaderboards",
+      "challenge_chat",
+      "friend_competitions"
+    ],
+    "phase_4_premium": [
+      "analytics",
+      "premium_features",
+      "wearable_integration",
+      "video_demonstrations"
+    ]
+  },
+  "competitive_features": {
+    "rivalry_mechanics": [
+      "Weekly rival selection",
+      "1v1 point competitions",
+      "Challenge exchanges",
+      "10% point stealing from rival wins"
+    ],
+    "ranking_system": {
+      "ranks": ["E", "D", "C", "B", "A", "S", "SS"],
+      "progression": "Cumulative points-based",
+      "bonuses": {
+        "workout_streak_7_days": "5% point bonus",
+        "rival_mode_win": "10% of rival's weekly points",
+        "daily_challenge_completion": "Standard point reward"
+      }
+    },
+    "challenge_types": {
+      "public": "Open join for all users",
+      "private": "Invite only",
+      "features": ["In-app chat", "Rival pairings view", "Challenge-specific leaderboards"]
+    }
+  }
+}
