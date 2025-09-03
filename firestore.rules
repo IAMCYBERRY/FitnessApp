@@ -1,0 +1,115 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isValidUser() {
+      return isAuthenticated() && exists(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+    
+    // Users collection
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create: if isOwner(userId);
+      allow update: if isOwner(userId);
+      allow delete: if false; // Never allow deletion
+    }
+    
+    // User private data (sensitive information)
+    match /users/{userId}/private/{document=**} {
+      allow read, write: if isOwner(userId);
+    }
+    
+    // Workouts collection
+    match /users/{userId}/workouts/{workoutId} {
+      allow read: if isOwner(userId) || 
+                     (isAuthenticated() && resource.data.isPublic == true);
+      allow create, update: if isOwner(userId);
+      allow delete: if isOwner(userId);
+    }
+    
+    // Nutrition entries
+    match /users/{userId}/nutrition/{entryId} {
+      allow read, write: if isOwner(userId);
+    }
+    
+    // Challenges collection (public and private)
+    match /challenges/{challengeId} {
+      allow read: if isAuthenticated() && 
+                     (resource.data.isPublic == true || 
+                      request.auth.uid in resource.data.participants ||
+                      request.auth.uid == resource.data.createdBy);
+      allow create: if isValidUser();
+      allow update: if isAuthenticated() && 
+                       (request.auth.uid == resource.data.createdBy ||
+                        request.auth.uid in resource.data.participants);
+      allow delete: if isAuthenticated() && 
+                       request.auth.uid == resource.data.createdBy;
+    }
+    
+    // Challenge messages
+    match /challenges/{challengeId}/messages/{messageId} {
+      allow read: if isAuthenticated() && 
+                     exists(/databases/$(database)/documents/challenges/$(challengeId)) &&
+                     (request.auth.uid in get(/databases/$(database)/documents/challenges/$(challengeId)).data.participants);
+      allow create: if isAuthenticated() && 
+                       exists(/databases/$(database)/documents/challenges/$(challengeId)) &&
+                       (request.auth.uid in get(/databases/$(database)/documents/challenges/$(challengeId)).data.participants);
+      allow update, delete: if false;
+    }
+    
+    // Rival competitions
+    match /rivalModes/{rivalModeId} {
+      allow read: if isAuthenticated() && 
+                     (request.auth.uid == resource.data.user1Id || 
+                      request.auth.uid == resource.data.user2Id);
+      allow create: if isAuthenticated() && 
+                       (request.auth.uid == request.resource.data.user1Id || 
+                        request.auth.uid == request.resource.data.user2Id);
+      allow update: if isAuthenticated() && 
+                       (request.auth.uid == resource.data.user1Id || 
+                        request.auth.uid == resource.data.user2Id);
+      allow delete: if false;
+    }
+    
+    // Leaderboards (read-only for users)
+    match /leaderboards/{leaderboardId} {
+      allow read: if isAuthenticated();
+      allow write: if false; // Only server-side updates via Cloud Functions
+    }
+    
+    // Daily challenges (read-only for users)
+    match /dailyChallenges/{challengeId} {
+      allow read: if isAuthenticated();
+      allow write: if false; // Only server-side updates
+    }
+    
+    // Friend requests
+    match /friendRequests/{requestId} {
+      allow read: if isAuthenticated() && 
+                     (request.auth.uid == resource.data.fromUserId || 
+                      request.auth.uid == resource.data.toUserId);
+      allow create: if isAuthenticated() && 
+                       request.auth.uid == request.resource.data.fromUserId;
+      allow update: if isAuthenticated() && 
+                       request.auth.uid == resource.data.toUserId;
+      allow delete: if isAuthenticated() && 
+                       (request.auth.uid == resource.data.fromUserId || 
+                        request.auth.uid == resource.data.toUserId);
+    }
+    
+    // User points history (audit trail)
+    match /users/{userId}/pointsHistory/{historyId} {
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId);
+      allow update, delete: if false; // Immutable audit trail
+    }
+  }
+}
